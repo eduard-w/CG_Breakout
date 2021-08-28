@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.hpp"
+
 class Brick : public GameObject
 {
 public:

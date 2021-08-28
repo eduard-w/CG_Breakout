@@ -26,6 +26,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Obj3D.cpp" />
     <ClCompile Include="objects.cpp" />
     <ClCompile Include="objloader.cpp" />
@@ -37,6 +38,7 @@
   <ItemGroup>
     <ClInclude Include="Brick.hpp" />
     <ClInclude Include="GameObject.hpp" />
+    <ClInclude Include="InputManager.hpp" />
     <ClInclude Include="Obj3D.hpp" />
     <ClInclude Include="objects.hpp" />
     <ClInclude Include="objloader.hpp" />

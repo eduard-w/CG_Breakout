@@ -5,5 +5,6 @@ class Paddle : public GameObject
 {
 public:
 	Paddle();
+	virtual void update();
 };
 

@@ -17,6 +17,8 @@ using namespace glm;
 #include <iostream>
 #include "Brick.hpp"
 #include "SceneManager.hpp"
+#include "InputManager.hpp"
+#include "Paddle.hpp"
 
 void error_callback(int error, const char* description)
 {
@@ -25,43 +27,7 @@ void error_callback(int error, const char* description)
 
 GLFWvidmode return_struct;
 
-float posX{0};
-float posY{0};
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
-	switch (key)
-	{
-	case GLFW_KEY_ESCAPE:
-		glfwSetWindowShouldClose(window, GL_TRUE);
-		break;
-	case GLFW_KEY_W:
-		posX -= 0.1f;
-		break;
-	case GLFW_KEY_A:
-		posY -= 0.1f;
-		break;
-	case GLFW_KEY_S:
-		posX += 0.1f;
-		break;
-	case GLFW_KEY_D:
-		posY += 0.1f;
-		break;
-	default:
-		break;
-	}
-}
-
-int height{};
-int width{};
-void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
-{
-	posX = (ypos/(double)height - 0.5)*5;
-	posY = (xpos/(double)width - 0.5)*5;
-}
-
-glm::mat4 model;
-glm::mat4 view;
-glm::mat4 projection;
+glm::mat4 model, view, projection;
 
 // reference to shader program
 GLuint programID;
@@ -98,75 +64,18 @@ void createTexture() {
 	//glDeleteTextures(1, &texture);
 }
 
-void drawCS() {
-
-	glm::mat4 Save = model;
-	model = glm::scale(model, glm::vec3(2, 0.02f, 0.02f));
-	sendMVP();
-	drawCube();
-	model = Save;
-
-	model = glm::scale(model, glm::vec3(0.02f, 2, 0.02f));
-	sendMVP();
-	drawCube();
-	model = Save;
-
-	model = glm::scale(model, glm::vec3(0.02f, 0.02f, 2));
-	sendMVP();
-	drawCube();
-	model = Save;
-}
-
-void drawSeg(float h) {
-	glm::mat4 Save = model;
-	model = glm::translate(model, glm::vec3(0, 0, 0));
-	model = glm::scale(model, glm::vec3(0.1f, 0.1f, h));
-	sendMVP();
-	drawSphere(10, 10);
-	model = Save;
-}
-
 int main(void)
 {
-	if (!glfwInit())
-	{
-		fprintf(stderr, "Failed to initialize GLFW\n");
-		exit(EXIT_FAILURE);
-	}
+	GLFWwindow* window = InputManager::init();
 
-	glfwSetErrorCallback(error_callback);
-
-	GLFWwindow* window = glfwCreateWindow(1024, 768, "CG - Breakout", NULL, NULL);
-
-
-	if (!window)
-	{
-		glfwTerminate();
-		exit(EXIT_FAILURE);
-	}
-
-	glfwMakeContextCurrent(window);
-
-	glewExperimental = true;
-	if (glewInit() != GLEW_OK)
-	{
-		fprintf(stderr, "Failed to initialize GLEW\n");
-		return -1;
-	}
-	
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-	glfwGetWindowSize(window, &width, &height);
-	glfwSetKeyCallback(window, key_callback);
-	glfwSetCursorPosCallback(window, cursor_position_callback);
-
-	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 	programID = LoadShaders("StandardShading.vertexshader", "StandardShading.fragmentshader");
 	glUseProgram(programID);
-
 	createTexture();
 	
 	SceneManager sceneManager{ SceneManager::getInstance() };
+
 	sceneManager.addGameObject(new Brick{ glm::vec3{0} });
+	sceneManager.addGameObject(new Paddle);
 	
 	while (!glfwWindowShouldClose(window))
 	{
@@ -181,9 +90,8 @@ int main(void)
 			glm::vec3(0, 0, 1));
 		model = glm::mat4(1.0f);
 		glm::mat4 Save = model;
-
-		//platform.setPosition(glm::vec3{posX,posY,-2});
 		
+		sceneManager.updateAllSceneObjects();
 		// draw each object in scene
 		for (GameObject* o : sceneManager.getAllSceneObjects()) {
 			model = o->getTransform();

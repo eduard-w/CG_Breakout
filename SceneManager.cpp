@@ -18,6 +18,7 @@ void SceneManager::addGameObject(GameObject* gameObject)
 void SceneManager::updateAllSceneObjects()
 {
 	for (GameObject* o : sceneObjects) {
+		o->update();
 	}
 }
 

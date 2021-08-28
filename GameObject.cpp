@@ -1,5 +1,6 @@
-#include "GameObject.hpp"
 #include <string>
+
+#include "GameObject.hpp"
 
 GameObject::GameObject(const std::string modelFileName, glm::vec3 position, glm::vec3 scale)
 	: m_modelFileName{ modelFileName }, m_position{ position }, m_scale{ scale }

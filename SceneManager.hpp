@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "GameObject.hpp"
+
 class SceneManager
 {
 private:
