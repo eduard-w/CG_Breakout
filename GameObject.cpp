@@ -1,7 +1,8 @@
 #include "GameObject.hpp"
+#include <string>
 
-GameObject::GameObject(Obj3D& model, glm::vec3 position, glm::vec3 scale)
-	: m_model{ model }, m_position{ position }, m_scale{ scale }
+GameObject::GameObject(const std::string modelFileName, glm::vec3 position, glm::vec3 scale)
+	: m_modelFileName{ modelFileName }, m_position{ position }, m_scale{ scale }
 {
 	updateTransform();
 }
@@ -14,10 +15,15 @@ void GameObject::updateTransform() {
 }
 
 void GameObject::draw() {
-	m_model.display();
+	getMeshModel().display();
 }
 
 void GameObject::setPosition(glm::vec3 position) {
 	m_position = position;
 	updateTransform();
+}
+
+const Obj3D& GameObject::getMeshModel() const {
+	static Obj3D s_model{ ("resources/"+m_modelFileName).c_str() };
+	return s_model;
 }

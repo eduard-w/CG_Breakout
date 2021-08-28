@@ -39,7 +39,7 @@ Obj3D::Obj3D(const char* fn)
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
 }
 
-void Obj3D::display()
+void Obj3D::display() const
 {
 	glBindVertexArray(VertexArrayID);
 	glDrawArrays(GL_TRIANGLES, 0, vertices.size());

@@ -15,6 +15,8 @@ using namespace glm;
 #include "Obj3D.hpp"
 #include "GameObject.hpp"
 #include <iostream>
+#include "Brick.hpp"
+#include "SceneManager.hpp"
 
 void error_callback(int error, const char* description)
 {
@@ -84,7 +86,7 @@ GLuint texture{};
 
 void createTexture() {
 	if (!texture)
-		texture = loadBMP_custom("mandrill.bmp");
+		texture = loadBMP_custom("resources/mandrill.bmp");
 
 	// Bind our texture in Texture Unit 0
 	glActiveTexture(GL_TEXTURE0);
@@ -163,13 +165,8 @@ int main(void)
 
 	createTexture();
 	
-	std::vector<GameObject*> sceneObjects{};
-	Obj3D o_platform{ "cube.obj" };
-	Obj3D o_teapot{ "teapot.obj" };
-	GameObject teapot{ o_teapot, glm::vec3{0}, glm::vec3{0.001f} };
-	GameObject platform{ o_platform, glm::vec3{0,0,-2}, glm::vec3{1, 1, 0.1f} };
-	sceneObjects.push_back(&teapot);
-	sceneObjects.push_back(&platform);
+	SceneManager sceneManager{ SceneManager::getInstance() };
+	sceneManager.addGameObject(new Brick{ glm::vec3{0} });
 	
 	while (!glfwWindowShouldClose(window))
 	{
@@ -185,10 +182,10 @@ int main(void)
 		model = glm::mat4(1.0f);
 		glm::mat4 Save = model;
 
-		platform.setPosition(glm::vec3{posX,posY,-2});
+		//platform.setPosition(glm::vec3{posX,posY,-2});
 		
 		// draw each object in scene
-		for (GameObject* o : sceneObjects) {
+		for (GameObject* o : sceneManager.getAllSceneObjects()) {
 			model = o->getTransform();
 			sendMVP();
 			o->draw();

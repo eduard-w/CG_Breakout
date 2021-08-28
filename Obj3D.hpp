@@ -31,7 +31,7 @@ class Obj3D
 
 public:
 	Obj3D(const char* fn); // Konstruktor
-	void display();
+	void display() const;
 	~Obj3D(); // Destruktor
 };
 
