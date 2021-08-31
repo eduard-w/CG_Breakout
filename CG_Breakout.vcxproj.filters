@@ -39,9 +39,6 @@
     <ClCompile Include="BreakoutGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CGTutorial.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Source Files\game objects</Filter>
     </ClCompile>
@@ -56,6 +53,9 @@
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Frame.cpp">
+      <Filter>Source Files\game objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -88,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="InputManager.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Frame.hpp">
+      <Filter>Header Files\game objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

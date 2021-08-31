@@ -21,10 +21,7 @@
   <ItemGroup>
     <ClCompile Include="BreakoutGame.cpp" />
     <ClCompile Include="Brick.cpp" />
-    <ClCompile Include="CGTutorial.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="Frame.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Obj3D.cpp" />
@@ -37,6 +34,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Brick.hpp" />
+    <ClInclude Include="Frame.hpp" />
     <ClInclude Include="GameObject.hpp" />
     <ClInclude Include="InputManager.hpp" />
     <ClInclude Include="Obj3D.hpp" />

@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <vector>
 
 #include <GL/glew.h>
@@ -19,6 +18,7 @@ using namespace glm;
 #include "SceneManager.hpp"
 #include "InputManager.hpp"
 #include "Paddle.hpp"
+#include "Frame.hpp"
 
 void error_callback(int error, const char* description)
 {
@@ -42,7 +42,6 @@ void sendMVP()
 	glUniformMatrix4fv(glGetUniformLocation(programID, "MVP"), 1, GL_FALSE, &MVP[0][0]);
 }
 
-GLuint VertexArrayIDTeapot = 0;
 std::vector<glm::vec3> vertices;
 std::vector<glm::vec2> uvs;
 std::vector<glm::vec3> normals;
@@ -76,6 +75,7 @@ int main(void)
 
 	sceneManager.addGameObject(new Brick{ glm::vec3{0} });
 	sceneManager.addGameObject(new Paddle);
+	sceneManager.addGameObject(new Frame);
 	
 	while (!glfwWindowShouldClose(window))
 	{
@@ -85,8 +85,8 @@ int main(void)
 	
 		// setup mvp
 		projection = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f);
-		view = glm::lookAt(glm::vec3(8, 0, 0), 
-			glm::vec3(0, 0, 0),  
+		view = glm::lookAt(glm::vec3(60, 0, 20), 
+			glm::vec3(0, 0, 0),
 			glm::vec3(0, 0, 1));
 		model = glm::mat4(1.0f);
 		glm::mat4 Save = model;
@@ -99,8 +99,9 @@ int main(void)
 			o->draw();
 		}
 
+		// light
 		model = Save;
-		model = glm::translate(model, glm::vec3(0, 0, 1));
+		model = glm::translate(model, glm::vec3(0, 0, 30));
 		glm::vec4 lightPos = model * glm::vec4(0, 0, 0, 1);
 
 		// provide light position to shader program
@@ -110,6 +111,7 @@ int main(void)
 		glfwPollEvents();
 	}
 
+	GameObject::cleanUp();
 	glDeleteProgram(programID);
 	glDeleteTextures(1, &texture);
 	glfwTerminate();

@@ -1,10 +1,22 @@
 #include <string>
 
 #include "GameObject.hpp"
+#include <iostream>
+
+std::map<std::string, Obj3D*> GameObject::s_modelMap{};
 
 GameObject::GameObject(const std::string modelFileName, glm::vec3 position, glm::vec3 scale)
-	: m_modelFileName{ modelFileName }, m_position{ position }, m_scale{ scale }
+	: m_position{ position }, m_scale{ scale }
 {
+	auto i_model{ s_modelMap.find(modelFileName) };
+	if (i_model == s_modelMap.end()) {
+		// mesh not loaded yet -> load
+		m_mesh = new Obj3D{ ("resources/" + modelFileName).c_str() };
+		s_modelMap.insert({ modelFileName, m_mesh });
+	}
+	else {
+		m_mesh = i_model->second;
+	}
 	updateTransform();
 }
 
@@ -25,6 +37,13 @@ void GameObject::setPosition(glm::vec3 position) {
 }
 
 const Obj3D& GameObject::getMeshModel() const {
-	static Obj3D s_model{ ("resources/"+m_modelFileName).c_str() };
-	return s_model;
+	return *m_mesh;
+}
+
+void GameObject::cleanUp()
+{
+	for (auto i : s_modelMap) {
+		std::cout << "unloading resources/" << i.first << "...\n";
+		delete i.second;
+	}
 }
