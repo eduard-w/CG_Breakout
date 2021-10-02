@@ -9,9 +9,10 @@ private:
 	SceneManager();
 
 public:
-	static const SceneManager& getInstance();
+	static SceneManager& getInstance();
 	void addGameObject(GameObject* gameObject);
-	const auto getAllSceneObjects() { return sceneObjects; };
+	void removeGameObject(GameObject* gameObject);
+	const auto getAllSceneObjects() const { return sceneObjects; };
 	void updateAllSceneObjects();
 	~SceneManager();
 };

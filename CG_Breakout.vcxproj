@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Ball.cpp" />
     <ClCompile Include="BreakoutGame.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Frame.cpp" />
@@ -33,6 +34,7 @@
     <ClCompile Include="texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Ball.hpp" />
     <ClInclude Include="Brick.hpp" />
     <ClInclude Include="Frame.hpp" />
     <ClInclude Include="GameObject.hpp" />

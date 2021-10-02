@@ -36,6 +36,10 @@ void GameObject::setPosition(glm::vec3 position) {
 	updateTransform();
 }
 
+void GameObject::rotate(float angle, const glm::vec3& axis) {
+	m_rotation = glm::rotate(m_rotation, angle, axis);
+}
+
 const Obj3D& GameObject::getMeshModel() const {
 	return *m_mesh;
 }

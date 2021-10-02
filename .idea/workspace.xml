@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" ENABLED="true" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3b3e271d-5733-406a-94a8-60d72978e66a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/BreakoutGame.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/BreakoutGame.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CG_Breakout.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/CG_Breakout.vcxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CG_Breakout.vcxproj.filters" beforeDir="false" afterPath="$PROJECT_DIR$/CG_Breakout.vcxproj.filters" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameObject.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameObject.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paddle.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Paddle.cpp" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1xoO5Ic9CU7omlYCoBwQSljsY72" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="cf.first.check.clang-format" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3b3e271d-5733-406a-94a8-60d72978e66a" name="Default Changelist" comment="" />
+      <created>1631017821672</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1631017821672</updated>
+      <workItem from="1631017845644" duration="17000" />
+    </task>
+    <servers />
+  </component>
+</project>

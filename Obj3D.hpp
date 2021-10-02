@@ -26,5 +26,7 @@ public:
 	Obj3D(const char* fn);
 	void display() const;
 	~Obj3D();
+	const auto getVertices() const { return vertices; };
+	const auto getNormals() const { return normals; };
 };
 

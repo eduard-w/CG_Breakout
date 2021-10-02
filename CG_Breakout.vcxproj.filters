@@ -57,6 +57,9 @@
     <ClCompile Include="Frame.cpp">
       <Filter>Source Files\game objects</Filter>
     </ClCompile>
+    <ClCompile Include="Ball.cpp">
+      <Filter>Source Files\game objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="objects.hpp">
@@ -90,6 +93,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Frame.hpp">
+      <Filter>Header Files\game objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Ball.hpp">
       <Filter>Header Files\game objects</Filter>
     </ClInclude>
   </ItemGroup>

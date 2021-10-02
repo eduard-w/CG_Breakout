@@ -2,9 +2,9 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <string>
+#include <map>
 
 #include "Obj3D.hpp"
-#include <map>
 
 class GameObject
 {
@@ -25,6 +25,8 @@ public:
 	virtual void update() {};
 	const glm::vec3& getPosition() {return m_position;}
 	void setPosition(glm::vec3 position);
+	void rotate(float angle, const glm::vec3& axis);
+	const glm::vec3& getScale() {return m_scale;}
 	const glm::mat4& getTransform() {return m_transform;}
 	const Obj3D& getMeshModel() const;
 };

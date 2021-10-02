@@ -19,6 +19,7 @@ using namespace glm;
 #include "InputManager.hpp"
 #include "Paddle.hpp"
 #include "Frame.hpp"
+#include "Ball.hpp"
 
 void error_callback(int error, const char* description)
 {
@@ -71,17 +72,26 @@ int main(void)
 	glUseProgram(programID);
 	createTexture();
 	
-	SceneManager sceneManager{ SceneManager::getInstance() };
+	SceneManager& sceneManager{ SceneManager::getInstance() };
 
-	sceneManager.addGameObject(new Brick{ glm::vec3{0} });
+	sceneManager.addGameObject(new Ball);
 	sceneManager.addGameObject(new Paddle);
 	sceneManager.addGameObject(new Frame);
+
+	for (int x = -10; x <= 10; x+=3) {
+		for (int y = -10; y <= 10; y+=3) {
+			sceneManager.addGameObject(new Brick{ glm::vec3{x,y,10} });
+		}
+	}
 	
 	while (!glfwWindowShouldClose(window))
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glEnable(GL_DEPTH_TEST);
 		glDepthFunc(GL_LESS);
+
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_BACK);
 	
 		// setup mvp
 		projection = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f);
