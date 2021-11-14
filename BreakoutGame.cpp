@@ -74,7 +74,8 @@ int main(void)
 	
 	SceneManager& sceneManager{ SceneManager::getInstance() };
 
-	sceneManager.addGameObject(new Ball);
+	GameObject* ball{ new Ball };
+	sceneManager.addGameObject(ball);
 	sceneManager.addGameObject(new Paddle);
 	sceneManager.addGameObject(new Frame);
 
@@ -84,6 +85,8 @@ int main(void)
 		}
 	}
 	
+	glm::vec3 cameraPos{ glm::vec3(60, 0, 20) };
+
 	while (!glfwWindowShouldClose(window))
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -92,10 +95,12 @@ int main(void)
 
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_BACK);
-	
+
+		cameraPos = glm::vec3{ glm::cos(InputManager::getViewAngle())*30, glm::sin(InputManager::getViewAngle())*30, 15};
+
 		// setup mvp
-		projection = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f);
-		view = glm::lookAt(glm::vec3(60, 0, 20), 
+		projection = glm::perspective(75.0f, 4.0f / 3.0f, 0.1f, 100.0f);
+		view = glm::lookAt(cameraPos, 
 			glm::vec3(0, 0, 0),
 			glm::vec3(0, 0, 1));
 		model = glm::mat4(1.0f);
@@ -109,16 +114,12 @@ int main(void)
 			o->draw();
 		}
 
-		// light
-		model = Save;
-		model = glm::translate(model, glm::vec3(0, 0, 30));
-		glm::vec4 lightPos = model * glm::vec4(0, 0, 0, 1);
-
 		// provide light position to shader program
-		glUniform3f(glGetUniformLocation(programID, "LightPosition_worldspace"), lightPos.x, lightPos.y, lightPos.z);
+		glUniform3f(glGetUniformLocation(programID, "LightPosition_worldspace"), 0, 0, 0);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
+		InputManager::frame_callback();
 	}
 
 	GameObject::cleanUp();

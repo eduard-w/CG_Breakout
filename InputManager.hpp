@@ -5,7 +5,7 @@ class InputManager
 {
 private:
 	InputManager() = delete;
-	static float s_mousePosX, s_mousePosY;
+	static float s_mousePosX, s_mousePosY, s_viewAngle;
 	static int s_screenWidth, s_screenHeight;
 
 public:
@@ -13,8 +13,10 @@ public:
 	static float getMousePosY() { return s_mousePosY; };
 	static int getScreenWidth() { return s_screenWidth; };
 	static int getScreenHeight() { return s_screenHeight; };
+	static float getViewAngle() { return s_viewAngle; };
 	static GLFWwindow* init();
 	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 	static void cursor_position_callback(GLFWwindow * window, double xpos, double ypos);
 	static void error_callback(int error, const char* description);
+	static void frame_callback();
 };

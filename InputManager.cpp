@@ -4,11 +4,13 @@
 #include <functional>
 
 #include "InputManager.hpp"
+#include <iostream>
 
 float InputManager::s_mousePosX{ 0 };
 float InputManager::s_mousePosY{ 0 };
 int InputManager::s_screenWidth{ 0 };
 int InputManager::s_screenHeight{ 0 };
+float InputManager::s_viewAngle{ 0 };
 
 GLFWwindow* InputManager::init() {
 
@@ -46,24 +48,21 @@ GLFWwindow* InputManager::init() {
 	return window;
 }
 
+bool rotateCameraLeft{ false }, rotateCameraRight{ false };
 void InputManager::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
+	bool hold{ action != GLFW_RELEASE };
+
 	switch (key)
 	{
 	case GLFW_KEY_ESCAPE:
 		glfwSetWindowShouldClose(window, GL_TRUE);
 		break;
-	case GLFW_KEY_W:
-		s_mousePosX -= 0.1f;
-		break;
 	case GLFW_KEY_A:
-		s_mousePosY -= 0.1f;
-		break;
-	case GLFW_KEY_S:
-		s_mousePosX += 0.1f;
+		rotateCameraLeft = hold;
 		break;
 	case GLFW_KEY_D:
-		s_mousePosY += 0.1f;
+		rotateCameraRight = hold;
 		break;
 	default:
 		break;
@@ -79,4 +78,9 @@ void InputManager::cursor_position_callback(GLFWwindow* window, double xpos, dou
 void InputManager::error_callback(int error, const char* description)
 {
 	fputs(description, stderr);
+}
+
+void InputManager::frame_callback() {
+	if (rotateCameraLeft) s_viewAngle -= 0.05;
+	if (rotateCameraRight) s_viewAngle += 0.05;
 }

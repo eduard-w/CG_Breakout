@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated />
+  </component>
   <component name="CMakeSettings">
     <configurations>
       <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" ENABLED="true" />
@@ -7,11 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3b3e271d-5733-406a-94a8-60d72978e66a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/BreakoutGame.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/BreakoutGame.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CG_Breakout.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/CG_Breakout.vcxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CG_Breakout.vcxproj.filters" beforeDir="false" afterPath="$PROJECT_DIR$/CG_Breakout.vcxproj.filters" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameObject.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameObject.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paddle.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Paddle.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +35,19 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
   </component>
+  <component name="RunManager">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="3b3e271d-5733-406a-94a8-60d72978e66a" name="Default Changelist" comment="" />
@@ -44,7 +56,11 @@
       <option name="presentableId" value="Default" />
       <updated>1631017821672</updated>
       <workItem from="1631017845644" duration="17000" />
+      <workItem from="1634505452549" duration="615000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>
