@@ -5,9 +5,9 @@
 #include <typeinfo>
 #include <iostream>
 
-Ball::Ball() : GameObject{ "ball.mesh", glm::vec3{0.0f,0.0f,-10.0f}, glm::vec3{1.0f} }
+Ball::Ball() : GameObject{ "ball.mesh", glm::vec3{0.0f,0.0f,-10.0f}, glm::vec3{0.5f} }
 {
-	setVelocity(glm::vec3{0.02f,0.015f,0.022f});
+	setVelocity(glm::vec3{0.2f, 0.3f, 0.2f});
 }
 
 void Ball::setVelocity(glm::vec3 velocity) {

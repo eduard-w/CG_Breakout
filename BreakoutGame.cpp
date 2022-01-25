@@ -4,6 +4,8 @@
 
 #include <stdio.h>
 #include <vector>
+#include <chrono>
+#include <thread>
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -68,8 +70,8 @@ void createSceneObjects(SceneManager& sceneManager) {
 	sceneManager.addGameObject(new Paddle);
 	sceneManager.addGameObject(new Frame);
 	
-	int bricksPerRow = 6;
-	int bricksPerColumn = 2;
+	int bricksPerRow = 8;
+	int bricksPerColumn = 8;
 
 	for (int x = 0; x < bricksPerRow; x++) {
 		for (int y = 0; y < bricksPerColumn; y++) {
@@ -134,8 +136,16 @@ int main(void)
 	createSceneObjects(sceneManager);
 	glm::vec3 cameraPos{ glm::vec3(60, 0, 20) };
 
+	// run at 60 fps
+	std::chrono::milliseconds frameRate{1000/60};
+	std::chrono::steady_clock::time_point startTime;
+	std::chrono::duration<double, std::milli> runTime;
+
+	// main loop
 	while (!glfwWindowShouldClose(window))
 	{
+		startTime = std::chrono::high_resolution_clock::now();
+
 		doGlSubroutines();
 		setupMvp();
 		drawEachSceneObject(sceneManager);
@@ -146,6 +156,11 @@ int main(void)
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 		InputManager::frame_callback();
+
+		runTime = std::chrono::high_resolution_clock::now() - startTime;
+		if (runTime < frameRate) {
+			std::this_thread::sleep_for(frameRate - runTime);
+		}
 	}
 
 	cleanUp();
