@@ -6,6 +6,8 @@ class Ball : public GameObject
 {
 private:
 	glm::vec3 m_velocity{};
+	void detectCollision();
+	void detectFaceCollision(GameObject* obj);
 public:
 	Ball();
 	const glm::vec3& getVelocity() { return m_velocity; }
