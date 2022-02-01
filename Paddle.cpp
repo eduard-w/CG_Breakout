@@ -2,7 +2,7 @@
 #include "GameObject.hpp"
 #include "InputManager.hpp"
 
-Paddle::Paddle() : GameObject{ "cube.mesh", glm::vec3{0,0,-14.75}, glm::vec3{3,3,0.2}}
+Paddle::Paddle() : GameObject{  glm::vec3{0,0,-14.75}, glm::vec3{3,3,0.2}, "cube.mesh", "mandrill.bmp"}
 {
 }
 

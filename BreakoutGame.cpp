@@ -42,23 +42,6 @@ std::vector<glm::vec3> vertices;
 std::vector<glm::vec2> uvs;
 std::vector<glm::vec3> normals;
 
-// Load the texture
-GLuint texture{};
-
-void createTexture() {
-	if (!texture)
-		texture = loadBMP_custom("resources/mandrill.bmp");
-
-	// Bind our texture in Texture Unit 0
-	glActiveTexture(GL_TEXTURE0);
-	//glBindTexture(GL_TEXTURE_2D, texture);
-
-	// Set our "myTextureSampler" sampler to user Texture Unit 0
-	glUniform1i(glGetUniformLocation(shaderProgramID, "myTextureSampler"), 0);
-
-	//glDeleteTextures(1, &texture);
-}
-
 float calcVectorValue(int brickAmount, int brickNr) {
 	float factor = 0.5f * brickAmount - 0.5f;
 	return (brickNr - factor) * 4;
@@ -93,7 +76,7 @@ void doGlSubroutines() {
 void setupMvp() {
 	glm::vec3 cameraPos = glm::vec3{ glm::cos(InputManager::getViewAngle())*30, glm::sin(InputManager::getViewAngle())*30, 15};
 
-	projection = glm::perspective(75.0f, 4.0f / 3.0f, 0.1f, 100.0f);
+	projection = glm::perspective(90.0f, 4.0f / 3.0f, 0.1f, 100.0f);
 	view = glm::lookAt(cameraPos, glm::vec3(0, 0, 0), glm::vec3(0, 0, 1));
 	model = glm::mat4(1.0f);
 	glm::mat4 Save = model;
@@ -112,7 +95,12 @@ void drawEachSceneObject(SceneManager& sceneManager) {
 	sceneManager.updateAllSceneObjects();
 
 	for (GameObject* o : sceneManager.getAllSceneObjects()) {
+		// assign texture and transform
+		glActiveTexture(GL_TEXTURE0 + o->getTextureId());
+		glBindTexture(GL_TEXTURE_2D, o->getTextureId());
+		glUniform1i(glGetUniformLocation(shaderProgramID, "myTextureSampler"), o->getTextureId());
 		model = o->getTransform();
+		
 		syncMvpMatrixWithGpu();
 		o->draw();
 	}
@@ -121,7 +109,6 @@ void drawEachSceneObject(SceneManager& sceneManager) {
 void cleanUp() {
 	GameObject::cleanUp();
 	glDeleteProgram(shaderProgramID);
-	glDeleteTextures(1, &texture);
 	glfwTerminate();
 }
 
@@ -131,13 +118,14 @@ int main(void)
 
 	shaderProgramID = LoadShaders("StandardShading.vertexshader", "StandardShading.fragmentshader");
 	glUseProgram(shaderProgramID);
-	createTexture();
+	loadBMP_custom(std::string("resources/mandrill.bmp").c_str());
 	SceneManager& sceneManager{ SceneManager::getInstance() };
 	createSceneObjects(sceneManager);
 	glm::vec3 cameraPos{ glm::vec3(60, 0, 20) };
 
-	// run at 60 fps
-	std::chrono::milliseconds frameRate{1000/60};
+	// run at 60 frames per second
+	int fps = 60;
+	std::chrono::milliseconds frameRate{1000/fps};
 	std::chrono::steady_clock::time_point startTime;
 	std::chrono::duration<double, std::milli> runTime;
 

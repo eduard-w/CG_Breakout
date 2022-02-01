@@ -10,16 +10,18 @@ class GameObject
 {
 private:
 	static std::map<std::string, Obj3D*> s_modelMap;
+	static std::map<std::string, GLuint> s_textureMap;
 	glm::vec3 m_position{};
 	glm::mat4 m_rotation{1.0f};
 	glm::vec3 m_scale{};
 	glm::mat4 m_transform{1.0f};
 	Obj3D* m_mesh;
+	GLuint m_textureId;
 	GameObject();
 
 public:
 	static void cleanUp();
-	GameObject(const std::string modelFileName, glm::vec3 position = glm::vec3{ 0.0f }, glm::vec3 scale = glm::vec3{ 1.0f });
+	GameObject(glm::vec3 position = glm::vec3{ 0.0f }, glm::vec3 scale = glm::vec3{ 1.0f }, const std::string modelFileName = "cube.mesh", const std::string textureFileName = "mandrill.bmp");
 	void updateTransform();
 	void draw();
 	virtual void update() {};
@@ -29,5 +31,6 @@ public:
 	const glm::vec3& getScale() {return m_scale;}
 	const glm::mat4& getTransform() {return m_transform;}
 	const Obj3D& getMeshModel() const;
+	const GLuint getTextureId() { return m_textureId; };
 };
 
