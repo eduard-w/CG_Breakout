@@ -5,15 +5,20 @@
 class SceneManager
 {
 private:
-	std::vector<GameObject*> sceneObjects{};
 	SceneManager();
-	float calcVectorValue(int brickAmount, int brickNr);
+	std::vector<GameObject*> sceneObjects{};
+	GameObject* ball;
 
 public:
+	// getters
 	static SceneManager& getInstance();
+	const std::vector<GameObject*>& getAllSceneObjects() const { return sceneObjects; };
+	const GameObject& getBall() const { return *ball; };
+	
+	bool hasWon();
+	bool hasLost();
 	void addGameObject(GameObject* gameObject);
 	void removeGameObject(GameObject* gameObject);
-	const auto getAllSceneObjects() const { return sceneObjects; };
 	void createSceneObjects();
 	void updateAllSceneObjects();
 	~SceneManager();

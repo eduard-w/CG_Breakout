@@ -105,6 +105,8 @@ int main(void)
 	std::chrono::steady_clock::time_point startTime;
 	std::chrono::duration<double, std::milli> runTime;
 
+
+
 	// main loop
 	while (!glfwWindowShouldClose(window))
 	{
@@ -114,6 +116,18 @@ int main(void)
 		setupMvp();
 		sceneManager.updateAllSceneObjects();
 		drawEachSceneObject(sceneManager);
+		
+		// win condition
+		if (sceneManager.hasWon()) {
+			std::cout << "YOU WON\n";
+			break;
+		}
+		
+		// fail condition
+		if (sceneManager.hasLost()) {
+			std::cout << "YOU LOST\n";
+			break;
+		}
 
 		// provide light position to shader program
 		glUniform3f(glGetUniformLocation(shaderProgramID, "LightPosition_worldspace"), 0, 0, 0);

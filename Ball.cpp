@@ -72,7 +72,7 @@ void Ball::detectFaceCollision(GameObject* obj) {
 
 		if (leftOf(v1_2D, v2_2D, ball_2D) && leftOf(v2_2D, v3_2D, ball_2D) && leftOf(v3_2D, v1_2D, ball_2D)) {
 			// inside polygon -> collision detected
-			std::cout << "COLLISION";
+			// std::cout << "COLLISION";
 			// ball rebounds
 			setVelocity(getVelocity() - 2 * glm::dot(getVelocity(), vn) * vn);
 			// destroy if brick

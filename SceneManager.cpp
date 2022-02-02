@@ -3,6 +3,8 @@
 #include "Paddle.hpp"
 #include "Frame.hpp"
 #include "Brick.hpp"
+#include <typeinfo>
+#include <iostream>
 
 SceneManager::SceneManager()
 {
@@ -28,7 +30,8 @@ void SceneManager::removeGameObject(GameObject* gameObject)
 }
 
 void SceneManager::createSceneObjects() {
-	addGameObject(new Ball);
+	ball = new Ball;
+	addGameObject(ball);
 	addGameObject(new Paddle);
 	addGameObject(new Frame);
 
@@ -53,6 +56,15 @@ void SceneManager::updateAllSceneObjects()
 	for (GameObject* o : sceneObjects) {
 		o->update();
 	}
+}
+
+bool SceneManager::hasWon() {
+	auto isBrick = [](GameObject* o) {return typeid(*o) == typeid(Brick);};
+	return std::find_if(sceneObjects.begin(), sceneObjects.end(), isBrick) == sceneObjects.end();
+}
+
+bool SceneManager::hasLost() {
+	return getBall().getPosition().z < -14.5f;
 }
 
 SceneManager::~SceneManager()

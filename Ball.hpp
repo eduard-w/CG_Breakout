@@ -10,7 +10,7 @@ private:
 	void detectFaceCollision(GameObject* obj);
 public:
 	Ball();
-	const glm::vec3& getVelocity() { return m_velocity; }
+	const glm::vec3& getVelocity() const { return m_velocity; }
 	void setVelocity(glm::vec3 velocity);
 	virtual void update();
 };
