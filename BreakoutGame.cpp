@@ -42,28 +42,6 @@ std::vector<glm::vec3> vertices;
 std::vector<glm::vec2> uvs;
 std::vector<glm::vec3> normals;
 
-float calcVectorValue(int brickAmount, int brickNr) {
-	float factor = 0.5f * brickAmount - 0.5f;
-	return (brickNr - factor) * 4;
-}
-
-void createSceneObjects(SceneManager& sceneManager) {
-	GameObject* ball{ new Ball };
-	sceneManager.addGameObject(ball);
-	sceneManager.addGameObject(new Paddle);
-	sceneManager.addGameObject(new Frame);
-	
-	int bricksPerRow = 8;
-	int bricksPerColumn = 8;
-
-	for (int x = 0; x < bricksPerRow; x++) {
-		for (int y = 0; y < bricksPerColumn; y++) {
-			glm::vec3 brickPos = glm::vec3(calcVectorValue(bricksPerRow, x), calcVectorValue(bricksPerColumn, y), 10);
-			sceneManager.addGameObject(new Brick{ brickPos });
-		}
-	}
-}
-
 void doGlSubroutines() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);
@@ -92,7 +70,6 @@ void syncMvpMatrixWithGpu()
 }
 
 void drawEachSceneObject(SceneManager& sceneManager) {
-	sceneManager.updateAllSceneObjects();
 
 	for (GameObject* o : sceneManager.getAllSceneObjects()) {
 		// assign texture and transform
@@ -118,9 +95,8 @@ int main(void)
 
 	shaderProgramID = LoadShaders("StandardShading.vertexshader", "StandardShading.fragmentshader");
 	glUseProgram(shaderProgramID);
-	loadBMP_custom(std::string("resources/mandrill.bmp").c_str());
 	SceneManager& sceneManager{ SceneManager::getInstance() };
-	createSceneObjects(sceneManager);
+	sceneManager.createSceneObjects();
 	glm::vec3 cameraPos{ glm::vec3(60, 0, 20) };
 
 	// run at 60 frames per second
@@ -136,6 +112,7 @@ int main(void)
 
 		doGlSubroutines();
 		setupMvp();
+		sceneManager.updateAllSceneObjects();
 		drawEachSceneObject(sceneManager);
 
 		// provide light position to shader program
