@@ -5,6 +5,7 @@
 
 #include <typeinfo>
 #include <iostream>
+#include "Paddle.hpp"
 
 Ball::Ball() : GameObject{ glm::vec3{0.0f,0.0f,-10.0f}, glm::vec3{0.5f}, "ball.mesh", "mandrill.bmp"}
 {
@@ -24,7 +25,7 @@ static bool leftOf(const glm::vec2& a, const glm::vec2& b, const glm::vec2& p)
 	float area = 0.5f * (a.x * (b.y - p.y) +
 		b.x * (p.y - a.y) +
 		p.x * (a.y - b.y));
-	return (area > -0.5f);
+	return (area > -0.0f);
 }
 
 void Ball::handleCollisions(GameObject* obj, bool& retflag)
