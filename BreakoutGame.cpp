@@ -52,9 +52,9 @@ void doGlSubroutines() {
 }
 
 void setupMvp() {
-	glm::vec3 cameraPos = glm::vec3{ glm::cos(InputManager::getViewAngle())*30, glm::sin(InputManager::getViewAngle())*30, 15};
+	glm::vec3 cameraPos = glm::vec3{ glm::cos(InputManager::getViewAngle())*20, glm::sin(InputManager::getViewAngle())*20, 5};
 
-	projection = glm::perspective(90.0f, 4.0f / 3.0f, 0.1f, 100.0f);
+	projection = glm::perspective(120.0f, 4.0f / 3.0f, 0.1f, 100.0f);
 	view = glm::lookAt(cameraPos, glm::vec3(0, 0, 0), glm::vec3(0, 0, 1));
 	model = glm::mat4(1.0f);
 	glm::mat4 Save = model;
@@ -97,15 +97,12 @@ int main(void)
 	glUseProgram(shaderProgramID);
 	SceneManager& sceneManager{ SceneManager::getInstance() };
 	sceneManager.createSceneObjects();
-	glm::vec3 cameraPos{ glm::vec3(60, 0, 20) };
 
 	// run at 60 frames per second
 	int fps = 60;
 	std::chrono::milliseconds frameRate{1000/fps};
 	std::chrono::steady_clock::time_point startTime;
 	std::chrono::duration<double, std::milli> runTime;
-
-
 
 	// main loop
 	while (!glfwWindowShouldClose(window))
@@ -130,7 +127,7 @@ int main(void)
 		}
 
 		// provide light position to shader program
-		glUniform3f(glGetUniformLocation(shaderProgramID, "LightPosition_worldspace"), 0, 0, 0);
+		glUniform3f(glGetUniformLocation(shaderProgramID, "LightPosition_worldspace"), 0, 0, -10);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

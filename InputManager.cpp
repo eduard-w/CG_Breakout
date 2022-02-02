@@ -38,7 +38,7 @@ GLFWwindow* InputManager::init() {
 
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	glfwGetWindowSize(window, &s_screenWidth, &s_screenHeight);
-	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
 	// init callbacks
 	glfwSetErrorCallback(error_callback);
