@@ -1,21 +1,34 @@
 #include <string>
 
 #include "GameObject.hpp"
+#include "texture.hpp"
 #include <iostream>
 
 std::map<std::string, Obj3D*> GameObject::s_modelMap{};
+std::map<std::string, GLuint> GameObject::s_textureMap{};
 
-GameObject::GameObject(const std::string modelFileName, glm::vec3 position, glm::vec3 scale)
+GameObject::GameObject(glm::vec3 position, glm::vec3 scale, const std::string modelFileName, const std::string textureFileName)
 	: m_position{ position }, m_scale{ scale }
 {
 	auto i_model{ s_modelMap.find(modelFileName) };
 	if (i_model == s_modelMap.end()) {
 		// mesh not loaded yet -> load
-		m_mesh = new Obj3D{ ("resources/" + modelFileName).c_str() };
+		m_mesh = new Obj3D{ ("resources/" + modelFileName).c_str()};
 		s_modelMap.insert({ modelFileName, m_mesh });
 	}
 	else {
 		m_mesh = i_model->second;
+	}
+
+	auto i_texture{ s_textureMap.find(textureFileName) };
+	if (i_texture == s_textureMap.end()) {
+		// texture not loaded yet -> load and bind
+		m_textureId = loadBMP_custom(("resources/" + textureFileName).c_str());
+		std::cout << textureFileName << " " << m_textureId << '\n';
+		s_textureMap.insert({ textureFileName, m_textureId });
+	}
+	else {
+		m_textureId = i_texture->second;
 	}
 	updateTransform();
 }
@@ -49,5 +62,9 @@ void GameObject::cleanUp()
 	for (auto i : s_modelMap) {
 		std::cout << "unloading resources/" << i.first << "...\n";
 		delete i.second;
+	}
+	for (auto i : s_textureMap) {
+		std::cout << "unloading resources/" << i.first << "...\n";
+		glDeleteTextures(1, &i.second);
 	}
 }

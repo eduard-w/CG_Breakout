@@ -6,7 +6,7 @@
 #include <typeinfo>
 #include <iostream>
 
-Ball::Ball() : GameObject{ "ball.mesh", glm::vec3{0.0f,0.0f,-10.0f}, glm::vec3{0.5f} }
+Ball::Ball() : GameObject{ glm::vec3{0.0f,0.0f,-10.0f}, glm::vec3{0.5f}, "ball.mesh", "mandrill.bmp"}
 {
 	setVelocity(glm::vec3{ 0.2f, 0.3f, 0.2f });
 }
@@ -78,7 +78,7 @@ void Ball::handleCollisions(GameObject* obj, bool& retflag)
 
 			if (leftOf(v1_2D, v2_2D, ball_2D) && leftOf(v2_2D, v3_2D, ball_2D) && leftOf(v3_2D, v1_2D, ball_2D)) {
 				// inside polygon -> collision detected
-				std::cout << "COLLISION";
+				// std::cout << "COLLISION";
 				// ball rebounds
 				setVelocity(getVelocity() - 2 * glm::dot(getVelocity(), vn) * vn);
 				// destroy if brick
