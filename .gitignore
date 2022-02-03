@@ -93,6 +93,9 @@ StyleCopReport.xml
 *.svclog
 *.scc
 
+# exclude wavefront .obj files
+!resources/*.obj
+
 # Chutzpah Test files
 _Chutzpah*
 
