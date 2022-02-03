@@ -7,6 +7,7 @@ class SceneManager
 private:
 	SceneManager();
 	std::vector<GameObject*> sceneObjects{};
+	std::vector<int> toBeRemovedObjects{};
 	GameObject* ball;
 
 public:
@@ -18,7 +19,8 @@ public:
 	bool hasWon();
 	bool hasLost();
 	void addGameObject(GameObject* gameObject);
-	void removeGameObject(GameObject* gameObject);
+	void scheduleRemoveGameObject(GameObject* gameObject);
+	void removeAllScheduledGameObjects();
 	void createSceneObjects();
 	void updateAllSceneObjects();
 	~SceneManager();

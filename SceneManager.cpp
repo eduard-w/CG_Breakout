@@ -21,12 +21,18 @@ void SceneManager::addGameObject(GameObject* gameObject)
 	sceneObjects.push_back(gameObject);
 }
 
-void SceneManager::removeGameObject(GameObject* gameObject)
+void SceneManager::scheduleRemoveGameObject(GameObject* gameObject)
 {
 	auto it = std::find(sceneObjects.begin(), sceneObjects.end(), gameObject);
 	if (it != sceneObjects.end())
-		sceneObjects.erase(it);
-	delete gameObject;
+		toBeRemovedObjects.push_back(it - sceneObjects.begin());
+}
+
+void SceneManager::removeAllScheduledGameObjects() {
+	for (int it: toBeRemovedObjects) {
+		sceneObjects.erase(sceneObjects.begin() + it);
+	}
+	toBeRemovedObjects.clear();
 }
 
 void SceneManager::createSceneObjects() {
@@ -35,8 +41,8 @@ void SceneManager::createSceneObjects() {
 	addGameObject(new Paddle);
 	addGameObject(new Frame);
 
-	int bricksPerRow = 8;
-	int bricksPerColumn = 8;
+	int bricksPerRow = 3;
+	int bricksPerColumn = 3;
 
 	auto calcVectorValue{ [](int brickAmount, int brickNr) -> float {
 		float factor = 0.5f * brickAmount - 0.5f;
@@ -56,6 +62,7 @@ void SceneManager::updateAllSceneObjects()
 	for (GameObject* o : sceneObjects) {
 		o->update();
 	}
+	removeAllScheduledGameObjects();
 }
 
 bool SceneManager::hasWon() {

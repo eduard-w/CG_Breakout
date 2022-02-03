@@ -82,7 +82,7 @@ void Ball::handleCollisions(GameObject* obj, bool& retflag)
 				setVelocity(getVelocity() - 2 * glm::dot(getVelocity(), vn) * vn);
 			}
 			if (typeid(*obj) == typeid(Brick)) {
-				SceneManager::getInstance().removeGameObject(obj);
+				SceneManager::getInstance().scheduleRemoveGameObject(obj);
 			}
 			return;
 		}
