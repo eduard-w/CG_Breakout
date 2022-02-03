@@ -26,6 +26,7 @@ using namespace glm;
 #include "Paddle.hpp"
 #include "Frame.hpp"
 #include "Ball.hpp"
+#include "BreakoutGame.h"
 
 void error_callback(int error, const char* description)
 {
@@ -89,6 +90,41 @@ void cleanUp() {
 	glfwTerminate();
 }
 
+void mainLoop(std::chrono::steady_clock::time_point& startTime, SceneManager& sceneManager, GLFWwindow* window, std::chrono::duration<double, std::milli>& runTime, std::chrono::milliseconds& frameRate, int& retflag)
+{
+	retflag = 1;
+	startTime = std::chrono::high_resolution_clock::now();
+
+	doGlSubroutines();
+	setupMvp();
+	sceneManager.updateAllSceneObjects();
+	drawEachSceneObject(sceneManager);
+
+	// win condition
+	if (sceneManager.hasWon()) {
+		std::cout << "YOU WON\n";
+		{ retflag = 2; return; };
+	}
+
+	// fail condition
+	if (sceneManager.hasLost()) {
+		std::cout << "YOU LOST\n";
+		{ retflag = 2; return; };
+	}
+
+	// provide light position to shader program
+	glUniform3f(glGetUniformLocation(shaderProgramID, "LightPosition_worldspace"), 0, 0, -10);
+
+	glfwSwapBuffers(window);
+	glfwPollEvents();
+	InputManager::frame_callback();
+
+	runTime = std::chrono::high_resolution_clock::now() - startTime;
+	if (runTime < frameRate) {
+		std::this_thread::sleep_for(frameRate - runTime);
+	}
+}
+
 int main(void)
 {
 	GLFWwindow* window = InputManager::init();
@@ -104,39 +140,11 @@ int main(void)
 	std::chrono::steady_clock::time_point startTime;
 	std::chrono::duration<double, std::milli> runTime;
 
-	// main loop
 	while (!glfwWindowShouldClose(window))
 	{
-		startTime = std::chrono::high_resolution_clock::now();
-
-		doGlSubroutines();
-		setupMvp();
-		sceneManager.updateAllSceneObjects();
-		drawEachSceneObject(sceneManager);
-		
-		// win condition
-		if (sceneManager.hasWon()) {
-			std::cout << "YOU WON\n";
-			break;
-		}
-		
-		// fail condition
-		if (sceneManager.hasLost()) {
-			std::cout << "YOU LOST\n";
-			break;
-		}
-
-		// provide light position to shader program
-		glUniform3f(glGetUniformLocation(shaderProgramID, "LightPosition_worldspace"), 0, 0, -10);
-
-		glfwSwapBuffers(window);
-		glfwPollEvents();
-		InputManager::frame_callback();
-
-		runTime = std::chrono::high_resolution_clock::now() - startTime;
-		if (runTime < frameRate) {
-			std::this_thread::sleep_for(frameRate - runTime);
-		}
+		int retflag;
+		mainLoop(startTime, sceneManager, window, runTime, frameRate, retflag);
+		if (retflag == 2) break;
 	}
 
 	cleanUp();

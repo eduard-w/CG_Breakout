@@ -19,5 +19,4 @@ void Paddle::update() {
 		getAdjustedPosX() * glm::cos(InputManager::getViewAngle()) - getAdjustedPosY() * glm::sin(InputManager::getViewAngle()),
 		getAdjustedPosY() * glm::cos(InputManager::getViewAngle()) + getAdjustedPosX() * glm::sin(InputManager::getViewAngle()),
 		getPosition().z });
-
 }

@@ -98,6 +98,9 @@
     <ClInclude Include="Ball.hpp">
       <Filter>Header Files\game objects</Filter>
     </ClInclude>
+    <ClInclude Include="BreakoutGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="StandardShading.fragmentshader" />
