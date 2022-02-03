@@ -6,7 +6,7 @@
 #include <typeinfo>
 #include <iostream>
 
-Ball::Ball() : GameObject{ glm::vec3{0.0f,0.0f,-10.0f}, glm::vec3{0.5f}, "ball.mesh", "mandrill.bmp" }
+Ball::Ball() : GameObject{ glm::vec3{0.0f,0.0f,-10.0f}, glm::vec3{0.5f}, "ball.obj", "mandrill.bmp"}
 {
 	setVelocity(glm::normalize(glm::vec3{ 0.2f, 0.3f, 0.2f }) * 0.4f);
 }

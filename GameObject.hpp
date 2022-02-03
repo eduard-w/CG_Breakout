@@ -21,7 +21,7 @@ private:
 
 public:
 	static void cleanUp();
-	GameObject(glm::vec3 position = glm::vec3{ 0.0f }, glm::vec3 scale = glm::vec3{ 1.0f }, const std::string modelFileName = "cube.mesh", const std::string textureFileName = "mandrill.bmp");
+	GameObject(glm::vec3 position = glm::vec3{ 0.0f }, glm::vec3 scale = glm::vec3{ 1.0f }, const std::string modelFileName = "cube.obj", const std::string textureFileName = "mandrill.bmp");
 	void updateTransform();
 	void draw();
 	virtual void update() {};
