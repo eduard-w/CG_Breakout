@@ -41,8 +41,8 @@ void SceneManager::createSceneObjects() {
 	addGameObject(new Paddle);
 	addGameObject(new Frame);
 
-	int bricksPerRow = 3;
-	int bricksPerColumn = 3;
+	int bricksPerRow = 4;
+	int bricksPerColumn = 4;
 
 	auto calcVectorValue{ [](int brickAmount, int brickNr) -> float {
 		float factor = 0.5f * brickAmount - 0.5f;

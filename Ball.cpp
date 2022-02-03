@@ -8,7 +8,7 @@
 
 Ball::Ball() : GameObject{ glm::vec3{0.0f,0.0f,-10.0f}, glm::vec3{0.5f}, "ball.obj", "mandrill.bmp"}
 {
-	setVelocity(glm::normalize(glm::vec3{ 0.2f, 0.3f, 0.2f }) * 0.4f);
+	setVelocity(glm::normalize(glm::vec3{ 0.2f, 0.3f, 0.2f }) * 0.3f);
 }
 
 void Ball::setVelocity(glm::vec3 velocity) {
@@ -77,7 +77,7 @@ void Ball::handleCollisions(GameObject* obj, bool& retflag)
 		if (isBallInsidePolygon) {
 			if (typeid(*obj) == typeid(Paddle)) {
 				glm::vec3 newBallDirection = getPosition() - (obj->getPosition() - glm::vec3(0, 0, 1));
-				setVelocity(glm::normalize(newBallDirection) * 0.4f);
+				setVelocity(glm::normalize(newBallDirection) * 0.3f);
 			} else {
 				setVelocity(getVelocity() - 2 * glm::dot(getVelocity(), vn) * vn);
 			}
