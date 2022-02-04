@@ -1,3 +1,7 @@
+/*	Eduard Weber
+	Konstantin Zehnter
+*/
+
 #include "SceneManager.hpp"
 #include "Ball.hpp"
 #include "Paddle.hpp"
