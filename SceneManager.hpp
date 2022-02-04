@@ -1,3 +1,7 @@
+/*	Eduard Weber
+	Konstantin Zehnter
+*/
+
 #pragma once
 #include <vector>
 #include "GameObject.hpp"

@@ -1,3 +1,7 @@
+/*	Eduard Weber
+	Konstantin Zehnter
+*/
+
 #include "Paddle.hpp"
 #include "GameObject.hpp"
 #include "InputManager.hpp"

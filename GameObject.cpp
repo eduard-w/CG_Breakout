@@ -1,3 +1,7 @@
+/*	Eduard Weber
+	Konstantin Zehnter
+*/
+
 #include <string>
 
 #include "GameObject.hpp"
@@ -24,7 +28,6 @@ GameObject::GameObject(glm::vec3 position, glm::vec3 scale, const std::string mo
 	if (i_texture == s_textureMap.end()) {
 		// texture not loaded yet -> load and bind
 		m_textureId = loadBMP_custom(("resources/" + textureFileName).c_str());
-		std::cout << textureFileName << " " << m_textureId << '\n';
 		s_textureMap.insert({ textureFileName, m_textureId });
 	}
 	else {
@@ -60,11 +63,9 @@ const Obj3D& GameObject::getMeshModel() const {
 void GameObject::cleanUp()
 {
 	for (auto i : s_modelMap) {
-		std::cout << "unloading resources/" << i.first << "...\n";
 		delete i.second;
 	}
 	for (auto i : s_textureMap) {
-		std::cout << "unloading resources/" << i.first << "...\n";
 		glDeleteTextures(1, &i.second);
 	}
 }
