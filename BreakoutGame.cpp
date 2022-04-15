@@ -14,7 +14,6 @@
 using namespace glm;
 
 #include "shader.hpp"
-#include "objects.hpp"
 #include "objloader.hpp"
 #include "texture.hpp"
 #include "Obj3D.hpp"
