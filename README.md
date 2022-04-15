@@ -1,9 +1,9 @@
 # CG_Breakout
 
 This is a small 3D breakout game written in C++ using OpenGL.  
-If the game is either won (all bricks broken) or lost (ball touches lava), the window closes with a message.
+To playtest this a debug build can be created and run via the Visual Studio project. If the game is either won (all bricks broken) or lost (ball touches lava), the window closes with a message.  
 
-To playtest this a debug build can be created and run via the Visual Studio project.
+![Alt Text](preview.gif)
 
 ## Controls
 
